@@ -33,13 +33,16 @@
 - **使用的模型**：与当前对话相同的模型
 - **提示词工程**：使用专门的系统提示（`getCompressionPrompt()`）
 - **输出格式**：结构化 XML，格式如下：
+
+```xml
   <state_snapshot>
-  <overall_goal>一句话描述目标</overall_goal>
-  <key_knowledge>关键事实/约定的要点列表</key_knowledge>
-  <file_system_state>已创建/修改/删除文件的状态</file_system_state>
-  <recent_actions>最近重要操作的摘要</recent_actions>
-  <current_plan>带有 [DONE]/[IN PROGRESS]/[TODO] 标记的逐步计划</current_plan>
+    <overall_goal>一句话描述目标</overall_goal>
+    <key_knowledge>关键事实/约定的要点列表</key_knowledge>
+    <file_system_state>已创建/修改/删除文件的状态</file_system_state>
+    <recent_actions>最近重要操作的摘要</recent_actions>
+    <current_plan>带有 [DONE]/[IN PROGRESS]/[TODO] 标记的逐步计划</current_plan>
   </state_snapshot>
+```
 
 ## 3. 上下文保留
 

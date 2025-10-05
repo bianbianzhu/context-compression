@@ -4,9 +4,9 @@
       "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
       "content-encoding": "gzip",
       "content-type": "application/json; charset=UTF-8",
-      "date": "Sun, 05 Oct 2025 01:09:07 GMT",
+      "date": "Sun, 05 Oct 2025 04:06:05 GMT",
       "server": "scaffolding on HTTPServer2",
-      "server-timing": "gfet4t7; dur=2105",
+      "server-timing": "gfet4t7; dur=2813",
       "transfer-encoding": "chunked",
       "vary": "Origin, X-Origin, Referer",
       "x-content-type-options": "nosniff",
@@ -19,11 +19,11 @@
       "content": {
         "parts": [
           {
-            "thoughtSignature": "<sig>",
+            "thoughtSignature": "Ct0GAdHtim+kaAO4U++5uMU7mo5/+5t5hXEAmi09hyNhu33l4FkLD+r5Jj73quulL/BeV/WWZgZgNkLgkOhNhgJZMz53vTO61/U1SKlHnodsW/iLxhu0v24qt4bvGSRXfZBsADMjgW3YKLsEwE7uD6ahozhVdlEtSaeDTW6eSIFwz1K53Qi0MhO1dXZwFjiGIjr5Ux4XPDwsMO3smWqEQlE3paXScTrEqRvHe1DDbrWzPITlFTrpUFYwBo1cn5memNtzL4BmHeQPXJqEU7wAgwYQaa92MypMBqtsyaB+Du08dj5iJtfjuejCT81dt0RHXQi84KX7wSLzVdKofeAb7qd7GNRQwJdgWfzNZtZJQCF2z967M5HeQ7kIv3zzRyHDY6Wn4BSQFZmDP5OsfvGUgrdjhp7i3Dp33ed5amkm+69KGj/OyeM+ibbK1xUL+kNhr6fa9Aij41BUuJC/KmdqJPV0EpWRqhUXUla1i+BbWKd2o3yra1QEsAyPdEn+Yt/3dNdIkJP+MC8SgmYEhJCLjwuZXL6YtYjunZXyUJU4qPVR2/ifZRXwooFCpRTQdftOHrR7QBioCAoecJUT5fvZhWaVr6ekl+bWgvdERrW9WPgWrlkWVSj4UjqJUpoc2SW0S1L4MHhvn9/jF67pdgGW75OMfroVmszjZvSdKYxoGB3/qOGZ0g1uOKReYIpsQHBuwk0op4a50Cl3uaySdW/FKu2k22+WJ4flrbOgDlMNuUg2yivfn9wx/YdsR16EeDSTUyB55/N/7rO9Gl8fEAXs8ESnwrROtZcOp5icEZmtFSllYygsGW0wFrl02wUkBF4mZ78f0UinFmJY+Un2qNFrj4j2tMJ3YVADNGG06ZEOx6G2SVKdnUGMkqCt68/2frY4h1Vsb5DoFvjIGl8wrH5r6+zH8I4imFwaFlTn6TMs6UTng9PL9ZeJtYASd+MMHeVlel7FUk1NP5B9w5DgJmcwdxFrB0x2cSJTE2YCUQe9AqT9JKm995ElhD8LJ0QnbckI3Cb2WQysjXwkE7Vy78m0+/KDZY0alg/g8FSEUVh4Gt6mhaaVTvaj4aX0kYaf6+MVCpsAoRRrGsbSLyPbyvIzUvQgVE9iUjMotpBKcmPu1s0ns9of2GvKZrTZza10+zx5",
             "functionCall": {
               "args": {
-                "brightness": 20,
-                "color_temp": "warm"
+                "color_temp": "warm",
+                "brightness": 10
               },
               "name": "set_light_values"
             }
@@ -36,17 +36,17 @@
     }
   ],
   "modelVersion": "gemini-2.5-flash",
-  "responseId": "M8XhaI-yJoCivr0P89yYwQo",
+  "responseId": "re7haPf6FI-qvr0P5bqQ2Qg",
   "usageMetadata": {
     "promptTokenCount": 118,
     "candidatesTokenCount": 25,
-    "totalTokenCount": 347,
+    "totalTokenCount": 363,
     "promptTokensDetails": [
       {
         "modality": "TEXT",
         "tokenCount": 118
       }
     ],
-    "thoughtsTokenCount": 204
+    "thoughtsTokenCount": 220
   }
 }
