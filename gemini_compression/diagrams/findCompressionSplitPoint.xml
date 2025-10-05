@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-10-02T00:00:00.000Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X) GPT-5" version="24.7.0" editor="www.drawio.com">
+  <diagram id="find-compress-split-point-flow" name="Flow">
+    <mxGraphModel dx="1484" dy="786" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Start -->
+        <mxCell id="start" value="Start" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="420" y="40" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Check fraction -->
+        <mxCell id="checkFraction" value="Check fraction (0 &lt; f &lt; 1)&#10;0 &lt; f &amp;&amp; f &lt; 1 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="350" y="140" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Throw Error -->
+        <mxCell id="throwError" value="Throw Error" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="90" y="170" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Compute metrics -->
+        <mxCell id="compute" value="Compute charCounts, total, target = total * fraction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="300" y="300" width="360" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- For loop -->
+        <mxCell id="forLoop" value="For i in 0..n-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="400" width="260" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- If user & no functionResponse -->
+        <mxCell id="condUserNoFR" value="content[i] is user &#10;&amp;&amp; no functionResponse ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="350" y="490" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- lastSplitPoint = i -->
+        <mxCell id="assignLastSplit" value="lastSplitPoint = i" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="670" y="515" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- cumulative >= target ? -->
+        <mxCell id="condCumulative" value="cumulative &gt;= target ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="670" y="610" width="200" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Return i -->
+        <mxCell id="returnI" value="return i" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="930" y="635" width="140" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- cumulative += charCounts[i] -->
+        <mxCell id="accumulate" value="cumulative += charCounts[i]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="350" y="640" width="260" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- After loop -->
+        <mxCell id="afterLoop" value="After loop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="730" width="260" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Check last model no functionCall -->
+        <mxCell id="checkLast" value="last is model &#10;&amp;&amp; no functionCall ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="350" y="800" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- return n -->
+        <mxCell id="returnN" value="return n (contents.length)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="670" y="835" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- return lastSplitPoint -->
+        <mxCell id="returnLastSplit" value="return lastSplitPoint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="70" y="835" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" edge="1" parent="1" source="start" target="checkFraction" style="endArrow=block;rounded=0;strokeColor=#6c8ebf;"/>
+        <mxCell id="e2" edge="1" parent="1" source="checkFraction" target="compute" value="Yes" style="endArrow=block;rounded=0;strokeColor=#d6b656;labelBackgroundColor=#ffffff;"/>
+        <mxCell id="e3" edge="1" parent="1" source="checkFraction" target="throwError" value="No" style="endArrow=block;rounded=0;strokeColor=#d6b656;labelBackgroundColor=#ffffff;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="210" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e4" edge="1" parent="1" source="compute" target="forLoop" style="endArrow=block;rounded=0;strokeColor=#82b366;"/>
+        <mxCell id="e5" edge="1" parent="1" source="forLoop" target="condUserNoFR" style="endArrow=block;rounded=0;strokeColor=#9673a6;"/>
+
+        <!-- Branch when user & no functionResponse -->
+        <mxCell id="e6" edge="1" parent="1" source="condUserNoFR" target="assignLastSplit" value="Yes" style="endArrow=block;rounded=0;strokeColor=#d6b656;labelBackgroundColor=#ffffff;"/>
+
+        <mxCell id="e7" edge="1" parent="1" source="assignLastSplit" target="condCumulative" style="endArrow=block;rounded=0;strokeColor=#82b366;"/>
+
+        <mxCell id="e8" edge="1" parent="1" source="condCumulative" target="returnI" value="Yes" style="endArrow=block;rounded=0;strokeColor=#d6b656;labelBackgroundColor=#ffffff;"/>
+
+        <mxCell id="e9" edge="1" parent="1" source="condCumulative" target="accumulate" value="No" style="endArrow=block;rounded=0;strokeColor=#d6b656;labelBackgroundColor=#ffffff;"/>
+
+        <!-- Branch when not user/noFR -->
+        <mxCell id="e10" edge="1" parent="1" source="condUserNoFR" target="accumulate" value="No" style="endArrow=block;rounded=0;strokeColor=#d6b656;labelBackgroundColor=#ffffff;"/>
+
+        <mxCell id="e11" edge="1" parent="1" source="accumulate" target="afterLoop" style="endArrow=block;rounded=0;strokeColor=#666666;"/>
+
+        <!-- After loop checks -->
+        <mxCell id="e12" edge="1" parent="1" source="afterLoop" target="checkLast" style="endArrow=block;rounded=0;strokeColor=#9673a6;"/>
+
+        <mxCell id="e13" edge="1" parent="1" source="checkLast" target="returnN" value="Yes" style="endArrow=block;rounded=0;strokeColor=#d6b656;labelBackgroundColor=#ffffff;"/>
+
+        <mxCell id="e14" edge="1" parent="1" source="checkLast" target="returnLastSplit" value="No" style="endArrow=block;rounded=0;strokeColor=#d6b656;labelBackgroundColor=#ffffff;"/>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,17 @@
+{
+  "role": "user",
+  "parts": [
+    {
+      "functionResponse": {
+        "name": "set_light_values",
+        "response": {
+          "result": {
+            "isError": false,
+            "brightness": 20,
+            "colorTemperature": "warm"
+          }
+        }
+      }
+    }
+  ]
+}

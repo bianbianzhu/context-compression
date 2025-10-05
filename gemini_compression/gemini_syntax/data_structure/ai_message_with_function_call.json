@@ -1,0 +1,52 @@
+{
+  "sdkHttpResponse": {
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Sun, 05 Oct 2025 01:09:07 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "server-timing": "gfet4t7; dur=2105",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    }
+  },
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "thoughtSignature": "<sig>",
+            "functionCall": {
+              "args": {
+                "brightness": 20,
+                "color_temp": "warm"
+              },
+              "name": "set_light_values"
+            }
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": "M8XhaI-yJoCivr0P89yYwQo",
+  "usageMetadata": {
+    "promptTokenCount": 118,
+    "candidatesTokenCount": 25,
+    "totalTokenCount": 347,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 118
+      }
+    ],
+    "thoughtsTokenCount": 204
+  }
+}
