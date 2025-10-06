@@ -25,7 +25,7 @@ const config: GenerateContentConfig = {
 
 // Configure the client
 const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
+  apiKey: process.env.GOOGLE_API_KEY,
 });
 
 // Define user prompt
