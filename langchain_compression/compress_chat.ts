@@ -6,7 +6,7 @@ import {
 } from "@langchain/core/messages";
 import { OpenAIChatModelId } from "@langchain/openai";
 import { initChatModel } from "langchain/chat_models/universal";
-import { countTokens } from "./utils.js";
+import { countTokens, getCuratedMessages } from "./utils.js";
 
 import {} from "@langchain/core/";
 import { getTokenLimit } from "./tokenLimit.js";
@@ -16,7 +16,10 @@ import { getCompressionPrompt } from "./compress_prompt.js";
 const COMPRESSION_TOKEN_THRESHOLD = 0.7;
 const COMPRESSION_PRESERVE_THRESHOLD = 0.3;
 // const DEFAULT_MODEL: OpenAIChatModelId = "gpt-4.1";
-const DEFAULT_MODEL = "gemini-2.5-pro";
+const DEFAULT_MODEL_INFO = {
+  model: "gemini-2.5-pro",
+  modelProvider: "google-genai",
+};
 
 type CompressionStatus =
   | "COMPRESSED"
@@ -28,12 +31,16 @@ interface ChatCompressionInfo {
   originalTokenCount: number;
   afterCompressionTokenCount: number;
   compressionStatus: CompressionStatus;
+  updatedMessages: BaseMessage[];
 }
 
 type CompressChatParams = {
   messages: BaseMessage[];
-  agentModel: string;
-  compressionModel?: string;
+  chatModel: string;
+  compressionModelInfo?: {
+    model: string;
+    modelProvider: string;
+  };
 };
 
 const configurableLLM = await initChatModel(undefined);
@@ -41,22 +48,31 @@ const configurableLLM = await initChatModel(undefined);
 export async function compressChat(
   args: CompressChatParams
 ): Promise<ChatCompressionInfo> {
-  const { messages, agentModel, compressionModel = DEFAULT_MODEL } = args;
+  const {
+    messages,
+    chatModel,
+    compressionModelInfo = DEFAULT_MODEL_INFO,
+  } = args;
+
+  const { curatedMessages, systemMessage } = getCuratedMessages(messages);
 
   // 历史对话为空，不进行压缩
-  if (messages.length === 0) {
+  if (curatedMessages.length === 0) {
     return {
       originalTokenCount: 0,
       afterCompressionTokenCount: 0,
       compressionStatus: "NOOP",
+      updatedMessages: messages,
     };
   }
 
   // 计算原始token数量
-  const originalTokenCount = countTokens(messages, agentModel);
+  // 这得包括system message的token数量， 但之后不压缩系统提示词
+  const originalTokenCount = countTokens(messages, chatModel);
 
   // 计算上下文窗口阈值
-  const tokenLimit = COMPRESSION_TOKEN_THRESHOLD * getTokenLimit(agentModel);
+  const tokenLimit =
+    (COMPRESSION_TOKEN_THRESHOLD * getTokenLimit(chatModel)) / 100;
 
   // 原始token数量未达到上下文窗口阈值，不压缩
   if (originalTokenCount < tokenLimit) {
@@ -64,17 +80,18 @@ export async function compressChat(
       originalTokenCount,
       afterCompressionTokenCount: originalTokenCount,
       compressionStatus: "NOOP",
+      updatedMessages: messages,
     };
   }
 
   // 找到压缩的分割点
   const splitPoint = findCompressSplitPoint(
-    messages,
+    curatedMessages,
     1 - COMPRESSION_PRESERVE_THRESHOLD
   );
 
-  const messagesToCompress = messages.slice(0, splitPoint);
-  const messagesToKeep = messages.slice(splitPoint);
+  const messagesToCompress = curatedMessages.slice(0, splitPoint);
+  const messagesToKeep = curatedMessages.slice(splitPoint);
 
   const compressPromptMessages: BaseMessage[] = [
     new SystemMessage(getCompressionPrompt()),
@@ -86,8 +103,7 @@ export async function compressChat(
 
   const summaryResponse = await configurableLLM.invoke(compressPromptMessages, {
     configurable: {
-      model: compressionModel,
-      modelProvider: "google-genai",
+      ...compressionModelInfo,
     },
   });
 
@@ -97,15 +113,20 @@ export async function compressChat(
     ...messagesToKeep,
   ];
 
+  if (systemMessage) {
+    updatedMessages.unshift(systemMessage);
+  }
+
   console.log("updatedMessages: ", updatedMessages);
 
-  const afterCompressionTokenCount = countTokens(updatedMessages, agentModel);
+  const afterCompressionTokenCount = countTokens(updatedMessages, chatModel);
 
   if (afterCompressionTokenCount > originalTokenCount) {
     return {
       originalTokenCount,
       afterCompressionTokenCount,
       compressionStatus: "COMPRESSION_FAILED_INFLATED_TOKEN_COUNT",
+      updatedMessages,
     };
   }
 
@@ -113,6 +134,7 @@ export async function compressChat(
     originalTokenCount,
     afterCompressionTokenCount,
     compressionStatus: "COMPRESSED",
+    updatedMessages,
   };
 }
 

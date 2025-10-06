@@ -3,6 +3,7 @@ import "dotenv/config";
 import {
   BaseMessage,
   HumanMessage,
+  SystemMessage,
   ToolMessage,
 } from "@langchain/core/messages";
 import { tool } from "@langchain/core/tools";
@@ -25,6 +26,7 @@ const configurableLLM = await initChatModel(undefined, {
 });
 
 const messages: BaseMessage[] = [
+  new SystemMessage("you are a helpful assistant"),
   new HumanMessage("what is the capital of the moon?"),
 ];
 
@@ -99,7 +101,7 @@ console.log(messages);
 
 const response = await compressChat({
   messages,
-  agentModel: model,
+  chatModel: model,
 });
 
 console.log(response);

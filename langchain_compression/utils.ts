@@ -1,4 +1,4 @@
-import { BaseMessage } from "@langchain/core/messages";
+import { BaseMessage, SystemMessage } from "@langchain/core/messages";
 import { encoding_for_model, TiktokenModel } from "tiktoken";
 
 export function countTokens(messages: BaseMessage[], model: string): number {
@@ -135,4 +135,23 @@ const TIKTOKEN_MODELS = new Set<TiktokenModel>([
 
 function isTiktokenModel(model: string): model is TiktokenModel {
   return TIKTOKEN_MODELS.has(model as TiktokenModel);
+}
+
+export function getCuratedMessages(messages: BaseMessage[]): {
+  curatedMessages: BaseMessage[];
+  systemMessage: SystemMessage | null;
+} {
+  // remove any system messages, since user instructions should be preserved
+  // 系统提示词理应在第一条。
+  const firstMessage = messages[0];
+  if (firstMessage instanceof SystemMessage) {
+    return {
+      curatedMessages: messages.slice(1),
+      systemMessage: firstMessage,
+    };
+  }
+  return {
+    curatedMessages: messages,
+    systemMessage: null,
+  };
 }
