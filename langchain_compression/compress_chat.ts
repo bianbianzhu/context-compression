@@ -15,7 +15,8 @@ import { getCompressionPrompt } from "./compress_prompt.js";
 
 const COMPRESSION_TOKEN_THRESHOLD = 0.7;
 const COMPRESSION_PRESERVE_THRESHOLD = 0.3;
-const DEFAULT_MODEL: OpenAIChatModelId = "gpt-5";
+// const DEFAULT_MODEL: OpenAIChatModelId = "gpt-4.1";
+const DEFAULT_MODEL = "gemini-2.5-pro";
 
 type CompressionStatus =
   | "COMPRESSED"
@@ -55,8 +56,7 @@ export async function compressChat(
   const originalTokenCount = countTokens(messages, agentModel);
 
   // 计算上下文窗口阈值
-  const tokenLimit =
-    (COMPRESSION_TOKEN_THRESHOLD * getTokenLimit(agentModel)) / 100;
+  const tokenLimit = COMPRESSION_TOKEN_THRESHOLD * getTokenLimit(agentModel);
 
   // 原始token数量未达到上下文窗口阈值，不压缩
   if (originalTokenCount < tokenLimit) {
@@ -87,7 +87,7 @@ export async function compressChat(
   const summaryResponse = await configurableLLM.invoke(compressPromptMessages, {
     configurable: {
       model: compressionModel,
-      modelProvider: "openai",
+      modelProvider: "google-genai",
     },
   });
 
