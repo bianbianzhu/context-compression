@@ -1,6 +1,6 @@
-import { BaseMessage, HumanMessage } from "@langchain/core/messages";
+import { AIMessage, BaseMessage, HumanMessage } from "@langchain/core/messages";
 
-function findCompressSplitPoint(
+export function findCompressSplitPoint(
   messages: BaseMessage[],
   fraction: number
 ): number {
@@ -21,10 +21,23 @@ function findCompressSplitPoint(
   let lastSplitPoint = 0;
   let cumulativeCharCount = 0;
 
-  for (let i = 0; i < history.length; i++) {
-    if (messages[i] instanceof HumanMessage) {
+  for (let i = 0; i < messages.length; i++) {
+    const message = messages[i];
+    if (message instanceof HumanMessage) {
+      if (cumulativeCharCount >= targetCharCount) {
+        lastSplitPoint = i;
+        return lastSplitPoint;
+      }
+      lastSplitPoint = i;
     }
+    cumulativeCharCount += charCounts[i];
   }
 
-  return 0;
+  const lastMessage = messages[messages.length - 1];
+
+  if (lastMessage instanceof AIMessage && !lastMessage.tool_calls?.length) {
+    return messages.length;
+  }
+
+  return lastSplitPoint;
 }

@@ -1,20 +1,17 @@
 import {
+  AIMessage,
   BaseMessage,
   HumanMessage,
-  ToolMessage,
+  SystemMessage,
 } from "@langchain/core/messages";
-import {
-  ChatOpenAI,
-  OpenAIChatModelId,
-  TiktokenModel,
-} from "@langchain/openai";
+import { OpenAIChatModelId } from "@langchain/openai";
 import { initChatModel } from "langchain/chat_models/universal";
 import { countTokens } from "./utils.js";
-import { tool } from "@langchain/core/tools";
-import { z } from "zod";
 
 import {} from "@langchain/core/";
 import { getTokenLimit } from "./tokenLimit.js";
+import { findCompressSplitPoint } from "./findCompressSplitPoint.js";
+import { getCompressionPrompt } from "./compress_prompt.js";
 
 const COMPRESSION_TOKEN_THRESHOLD = 0.7;
 const COMPRESSION_PRESERVE_THRESHOLD = 0.3;
@@ -33,22 +30,20 @@ interface ChatCompressionInfo {
 }
 
 type CompressChatParams = {
-  history: BaseMessage[];
+  messages: BaseMessage[];
   agentModel: string;
   compressionModel?: string;
 };
 
-const configurableLLM = await initChatModel(undefined, {
-  temperature: 0,
-});
+const configurableLLM = await initChatModel(undefined);
 
 export async function compressChat(
   args: CompressChatParams
 ): Promise<ChatCompressionInfo> {
-  const { history, agentModel, compressionModel = DEFAULT_MODEL } = args;
+  const { messages, agentModel, compressionModel = DEFAULT_MODEL } = args;
 
   // 历史对话为空，不进行压缩
-  if (history.length === 0) {
+  if (messages.length === 0) {
     return {
       originalTokenCount: 0,
       afterCompressionTokenCount: 0,
@@ -57,10 +52,11 @@ export async function compressChat(
   }
 
   // 计算原始token数量
-  const originalTokenCount = countTokens(history, agentModel);
+  const originalTokenCount = countTokens(messages, agentModel);
 
   // 计算上下文窗口阈值
-  const tokenLimit = COMPRESSION_TOKEN_THRESHOLD * getTokenLimit(agentModel);
+  const tokenLimit =
+    (COMPRESSION_TOKEN_THRESHOLD * getTokenLimit(agentModel)) / 100;
 
   // 原始token数量未达到上下文窗口阈值，不压缩
   if (originalTokenCount < tokenLimit) {
@@ -71,10 +67,52 @@ export async function compressChat(
     };
   }
 
+  // 找到压缩的分割点
+  const splitPoint = findCompressSplitPoint(
+    messages,
+    1 - COMPRESSION_PRESERVE_THRESHOLD
+  );
+
+  const messagesToCompress = messages.slice(0, splitPoint);
+  const messagesToKeep = messages.slice(splitPoint);
+
+  const compressPromptMessages: BaseMessage[] = [
+    new SystemMessage(getCompressionPrompt()),
+    ...messagesToCompress,
+    new HumanMessage(
+      "First, reason in your scratchpad. Then, generate the <state_snapshot>."
+    ),
+  ];
+
+  const summaryResponse = await configurableLLM.invoke(compressPromptMessages, {
+    configurable: {
+      model: compressionModel,
+      modelProvider: "openai",
+    },
+  });
+
+  const updatedMessages: BaseMessage[] = [
+    new HumanMessage({ content: summaryResponse.content }),
+    new AIMessage("Got it. Thanks for the additional context!"),
+    ...messagesToKeep,
+  ];
+
+  console.log("updatedMessages: ", updatedMessages);
+
+  const afterCompressionTokenCount = countTokens(updatedMessages, agentModel);
+
+  if (afterCompressionTokenCount > originalTokenCount) {
+    return {
+      originalTokenCount,
+      afterCompressionTokenCount,
+      compressionStatus: "COMPRESSION_FAILED_INFLATED_TOKEN_COUNT",
+    };
+  }
+
   return {
-    originalTokenCount: 0,
-    afterCompressionTokenCount: 0,
-    compressionStatus: "NOOP",
+    originalTokenCount,
+    afterCompressionTokenCount,
+    compressionStatus: "COMPRESSED",
   };
 }
 

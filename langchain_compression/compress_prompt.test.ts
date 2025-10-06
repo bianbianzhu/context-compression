@@ -10,13 +10,15 @@ import { initChatModel } from "langchain/chat_models/universal";
 import { z } from "zod";
 import type { OpenAIChatModelId } from "@langchain/openai";
 import type { AnthropicMessagesModelId } from "@langchain/anthropic";
+import { findCompressSplitPoint } from "./findCompressSplitPoint.js";
+import { compressChat } from "./compress_chat.js";
 
 // const model: AnthropicMessagesModelId = "claude-sonnet-4-5";
 
-// const model: OpenAIChatModelId = "gpt-4o";
+const model: OpenAIChatModelId = "gpt-4o";
 
 // no export model id for google-genai
-const model = "gemini-2.5-flash";
+// const model = "gemini-2.5-flash";
 
 const configurableLLM = await initChatModel(undefined, {
   temperature: 0,
@@ -72,9 +74,32 @@ if (result.tool_calls?.length) {
 }
 
 const result2 = await configurableLLM.bindTools([moonFaq]).invoke(messages, {
-  configurable: { model, modelProvider: "google-genai" },
+  configurable: { model },
 });
 
 messages.push(result2);
 
+messages.push(new HumanMessage("what is highest mountain in the world?"));
+
+const result3 = await configurableLLM.bindTools([moonFaq]).invoke(messages, {
+  configurable: { model },
+});
+
+messages.push(result3);
+
+messages.push(new HumanMessage("what is the color of the sun?"));
+
+const result4 = await configurableLLM.bindTools([moonFaq]).invoke(messages, {
+  configurable: { model },
+});
+
+messages.push(result4);
+
 console.log(messages);
+
+const response = await compressChat({
+  messages,
+  agentModel: model,
+});
+
+console.log(response);
