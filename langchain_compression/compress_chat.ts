@@ -71,8 +71,7 @@ export async function compressChat(
   const originalTokenCount = countTokens(messages, chatModel);
 
   // 计算上下文窗口阈值
-  const tokenLimit =
-    (COMPRESSION_TOKEN_THRESHOLD * getTokenLimit(chatModel)) / 100;
+  const tokenLimit = COMPRESSION_TOKEN_THRESHOLD * getTokenLimit(chatModel);
 
   // 原始token数量未达到上下文窗口阈值，不压缩
   if (originalTokenCount < tokenLimit) {
@@ -116,8 +115,6 @@ export async function compressChat(
   if (systemMessage) {
     updatedMessages.unshift(systemMessage);
   }
-
-  console.log("updatedMessages: ", updatedMessages);
 
   const afterCompressionTokenCount = countTokens(updatedMessages, chatModel);
 
