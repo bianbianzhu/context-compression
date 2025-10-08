@@ -1,0 +1,7 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "progress-recorder": "./progress_recorder/index.ts:mainAgent"
+  },
+  "env": ".env"
+}

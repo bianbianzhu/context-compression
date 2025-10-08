@@ -4,7 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "langgraph:in_mem:up": "npx @langchain/langgraph-cli dev --port 8888 -c ./langgraph.json .env"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "@langchain/langgraph": "^0.4.9",
     "@langchain/openai": "^0.6.14",
     "ajv": "^8.17.1",
+    "deepagents": "^0.0.2",
     "langchain": "^0.3.35",
     "tiktoken": "^1.0.22",
     "zod": "^3"

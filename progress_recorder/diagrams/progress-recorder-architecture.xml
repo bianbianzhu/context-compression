@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-10-07T00:00:00.000Z" agent="5.0" version="21.0.0" etag="example" type="device">
+  <diagram name="Progress Recorder Architecture" id="progress-recorder">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Progress Recorder Subagent Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Main Agent -->
+        <mxCell id="main-agent" value="Main Agent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="100" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Progress Recorder Subagent Container -->
+        <mxCell id="subagent-container" value="Progress Recorder Subagent" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;startSize=40;" vertex="1" parent="1">
+          <mxGeometry x="280" y="80" width="1040" height="500" as="geometry" />
+        </mxCell>
+        
+        <!-- Input: Tool Calling -->
+        <mxCell id="tool-calling" value="Tool Calling&#xa;Interface" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1" vertex="1" parent="subagent-container">
+          <mxGeometry x="40" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Semantic Analysis -->
+        <mxCell id="semantic-analysis" value="Semantic Analysis&#xa;&amp; Intent Classification" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1" vertex="1" parent="subagent-container">
+          <mxGeometry x="220" y="60" width="160" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Classification Types -->
+        <mxCell id="classification" value="Classification Types" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="440" y="40" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="class-constraint" value="• Constraints" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="subagent-container">
+          <mxGeometry x="450" y="60" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="class-decision" value="• Decisions" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="subagent-container">
+          <mxGeometry x="450" y="78" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="class-todo" value="• TODOs" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="subagent-container">
+          <mxGeometry x="450" y="96" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="class-note" value="• Notes" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="subagent-container">
+          <mxGeometry x="450" y="114" width="160" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Confidence & Protection Router -->
+        <mxCell id="router" value="Confidence Score&#xa;&amp; Protection Level&#xa;Router" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1" vertex="1" parent="subagent-container">
+          <mxGeometry x="680" y="40" width="160" height="100" as="geometry" />
+        </mxCell>
+        
+        <!-- Core Modules Section -->
+        <mxCell id="modules-title" value="Core Functional Modules" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="subagent-container">
+          <mxGeometry x="40" y="160" width="960" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Module 1: Semantic Recognition -->
+        <mxCell id="module-semantic" value="Semantic Recognition" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontSize=11;fontStyle=1;align=center;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="40" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="module-semantic-desc" value="Identifies info types&#xa;based on semantic&#xa;understanding" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="subagent-container">
+          <mxGeometry x="45" y="230" width="170" height="45" as="geometry" />
+        </mxCell>
+        
+        <!-- Module 2: Memory Management -->
+        <mxCell id="module-memory" value="Memory Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontSize=11;fontStyle=1;align=center;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="240" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="module-memory-desc" value="Structured storage&#xa;with task lifecycle&#xa;management (IDs, states)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="subagent-container">
+          <mxGeometry x="245" y="230" width="170" height="45" as="geometry" />
+        </mxCell>
+        
+        <!-- Module 3: Incremental Merging -->
+        <mxCell id="module-merge" value="Incremental Merging" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontSize=11;fontStyle=1;align=center;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="440" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="module-merge-desc" value="Smart merge strategy&#xa;Updates vs. creates&#xa;Conflict handling" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="subagent-container">
+          <mxGeometry x="445" y="230" width="170" height="45" as="geometry" />
+        </mxCell>
+        
+        <!-- Module 4: Archiving Mechanism -->
+        <mxCell id="module-archive" value="Archiving Mechanism" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontSize=11;fontStyle=1;align=center;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="640" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="module-archive-desc" value="Auto-archive when&#xa;&gt;100 items. Move to&#xa;progress.archive.md" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="subagent-container">
+          <mxGeometry x="645" y="230" width="170" height="45" as="geometry" />
+        </mxCell>
+        
+        <!-- Module 5: Confidence Judgment -->
+        <mxCell id="module-confidence" value="Confidence Judgment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontSize=11;fontStyle=1;align=center;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="840" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="module-confidence-desc" value="Analyzes certainty level&#xa;Strong: Protected areas&#xa;Weak: Notes + tag" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="subagent-container">
+          <mxGeometry x="845" y="230" width="170" height="45" as="geometry" />
+        </mxCell>
+        
+        <!-- Storage Structure Section -->
+        <mxCell id="storage-title" value="Structured Storage (progress.md)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="subagent-container">
+          <mxGeometry x="40" y="310" width="960" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Storage: Pinned (High Protection) -->
+        <mxCell id="storage-pinned" value="Pinned&#xa;(High Protection)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;align=center;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="80" y="360" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-pinned-desc" value="🔒 Key constraints&#xa;• No auto-modification&#xa;• &quot;MUST&quot; statements&#xa;• Critical requirements" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="subagent-container">
+          <mxGeometry x="90" y="390" width="180" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Storage: Decisions (High Protection) -->
+        <mxCell id="storage-decisions" value="Decisions&#xa;(High Protection)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;align=center;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="320" y="360" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-decisions-desc" value="🔒 Historical decisions&#xa;• Append-only log&#xa;• &quot;Decided to...&quot;&#xa;• Traceable history" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="subagent-container">
+          <mxGeometry x="330" y="390" width="180" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Storage: TODO (Medium Protection) -->
+        <mxCell id="storage-todo" value="TODO&#xa;(Medium Protection)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d6b656;fontSize=11;fontStyle=1;align=center;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="560" y="360" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-todo-desc" value="📋 Task management&#xa;• States: OPEN→DOING→DONE&#xa;• Priority: P0/P1/P2&#xa;• Unique IDs (#1, #2...)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="subagent-container">
+          <mxGeometry x="570" y="390" width="180" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Storage: Notes & Done (Low Protection) -->
+        <mxCell id="storage-notes" value="Notes &amp; Done&#xa;(Low Protection)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;align=center;verticalAlign=top;" vertex="1" parent="subagent-container">
+          <mxGeometry x="800" y="360" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-notes-desc" value="📝 Flexible records&#xa;• Can be auto-archived&#xa;• &quot;Maybe/Possibly&quot;&#xa;• Completion tracking" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="subagent-container">
+          <mxGeometry x="810" y="390" width="180" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Archive Storage (External) -->
+        <mxCell id="archive-storage" value="progress.archive.md&#xa;(Permanent Archive)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5d5d5;strokeColor=#666666;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1120" y="640" width="180" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Flow Arrows -->
+        <!-- Main Agent to Tool Calling -->
+        <mxCell id="arrow1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;curved=1;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="main-agent" target="tool-calling">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1-label" value="Information via&#xa;Tool Calling" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="arrow1">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Tool Calling to Semantic Analysis -->
+        <mxCell id="arrow2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;curved=1;strokeWidth=2;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="tool-calling" target="semantic-analysis">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Semantic Analysis to Classification -->
+        <mxCell id="arrow3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;curved=1;strokeWidth=2;fillColor=#f5f5f5;strokeColor=#666666;" edge="1" parent="1" source="semantic-analysis" target="classification">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Classification to Router -->
+        <mxCell id="arrow4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;curved=1;strokeWidth=2;fillColor=#ffe6cc;strokeColor=#d79b00;" edge="1" parent="1" source="classification" target="router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Router to Storage Areas (with labels) -->
+        <mxCell id="arrow5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;curved=1;strokeWidth=2;fillColor=#f8cecc;strokeColor=#b85450;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="router" target="storage-pinned">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow5-label" value="High Confidence&#xa;&quot;MUST&quot;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="arrow5">
+          <mxGeometry x="-0.2" y="2" relative="1" as="geometry">
+            <mxPoint x="-20" y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;curved=1;strokeWidth=2;fillColor=#f8cecc;strokeColor=#b85450;exitX=0.4;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="router" target="storage-decisions">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow6-label" value="High Confidence&#xa;&quot;Decided&quot;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="arrow6">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint x="-10" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;curved=1;strokeWidth=2;fillColor=#fff4e6;strokeColor=#d6b656;exitX=0.6;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="router" target="storage-todo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow7-label" value="Medium Confidence&#xa;&quot;Need to&quot;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="arrow7">
+          <mxGeometry x="-0.05" y="1" relative="1" as="geometry">
+            <mxPoint x="15" y="25" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;curved=1;strokeWidth=2;fillColor=#e1d5e7;strokeColor=#9673a6;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="router" target="storage-notes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow8-label" value="Low Confidence&#xa;&quot;Maybe/Possibly&quot;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="arrow8">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry">
+            <mxPoint x="30" y="30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Archive Arrow -->
+        <mxCell id="arrow9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;curved=1;strokeWidth=2;fillColor=#d5d5d5;strokeColor=#666666;dashed=1;" edge="1" parent="1" source="storage-notes" target="archive-storage">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow9-label" value="Auto-archive&#xa;when &gt; 100 items" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="arrow9">
+          <mxGeometry x="-0.2" y="2" relative="1" as="geometry">
+            <mxPoint x="15" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Legend -->
+        <mxCell id="legend-box" value="Legend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;fontStyle=1;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="80" y="640" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-1" value="🔒 High Protection: No auto-modification" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="90" y="665" width="260" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-2" value="📋 Medium Protection: Managed lifecycle" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="90" y="690" width="260" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-3" value="📝 Low Protection: Can be archived" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="90" y="715" width="260" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-4" value="Curved arrows show data flow direction" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="90" y="735" width="260" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Key Features Box -->
+        <mxCell id="features-box" value="Key Features" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="420" y="640" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="feature-1" value="✓ Semantic-based classification (not keyword matching)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="430" y="665" width="340" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature-2" value="✓ Confidence-driven routing to appropriate storage" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="430" y="685" width="340" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature-3" value="✓ Smart incremental merging (updates vs. creates new)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="430" y="705" width="340" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature-4" value="✓ Protection levels prevent accidental overwrites" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="430" y="725" width="340" height="20" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+
