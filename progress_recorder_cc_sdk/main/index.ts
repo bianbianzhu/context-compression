@@ -1,60 +1,40 @@
-import { Query, query } from "@anthropic-ai/claude-agent-sdk";
-import { loadMarkdownFile } from "./utils.js";
-import { AnthropicMessagesModelId } from "@langchain/anthropic";
-import { optionsWithCleanEnv } from "../utils.js";
-import { agents } from "./subagent.js";
+import readline from "readline";
+import { mainAgent } from "./main_agent.js";
 
-const model: AnthropicMessagesModelId = "claude-sonnet-4-5";
+let id: string | undefined;
 
-type ConversationArgs = {
-  prompt: string;
-  id?: string;
-};
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  prompt: "🙍‍♂️ You: ",
+});
 
-async function mainAgent(args: ConversationArgs) {
-  const { prompt, id } = args;
+rl.prompt();
 
-  let session: string | undefined = id;
-
-  const memoryRules = await loadMarkdownFile("memoryRules");
-
-  const iterator: Query = query({
-    prompt,
-    options: {
-      ...optionsWithCleanEnv,
-      resume: session,
-      model,
-      systemPrompt: memoryRules,
-      agents,
-    },
-  });
-
-  for await (const message of iterator) {
-    console.log(JSON.stringify(message, null, 2));
-    console.log("\n---\n");
-
-    switch (message.type) {
-      case "system":
-        if (message.subtype === "init" && !session) {
-          session = message.session_id;
-        }
-        break;
-
-      case "assistant":
-        for (const content of message.message.content) {
-          if (content.type === "text") {
-            console.log("🤖 Agent: " + content.text);
-          }
-        }
-        break;
-
-      default:
-        break;
-    }
+rl.on("line", async (line) => {
+  const trimmedLine = line.trim();
+  if (trimmedLine === "exit") {
+    rl.close();
+    return;
   }
-}
 
-mainAgent({
-  prompt:
-    "help me build a landing page and a dashboard for my company. It's a pet shop. Use modern design and tech stack. do both frontend and backend.",
+  if (trimmedLine === "reset") {
+    id = undefined;
+    console.log("Resetting conversation...");
+    rl.prompt();
+    return;
+  }
+
+  const { sessionId } = await mainAgent({
+    prompt: trimmedLine,
+    id,
+  });
+  id = sessionId;
+
+  rl.prompt();
+});
+
+rl.on("close", () => {
+  console.log("Bye!");
+  process.exit(0);
 });
