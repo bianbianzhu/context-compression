@@ -4,11 +4,13 @@ import { optionsWithCleanEnv } from "./utils.js";
 
 import { AnthropicMessagesModelId } from "@langchain/anthropic";
 
-const model: AnthropicMessagesModelId = "claude-3-5-haiku-latest";
+const model: AnthropicMessagesModelId = "claude-sonnet-4-5";
 
-async function basicGenerate() {
+export async function basicGenerate() {
   const resultIterator: Query = query({
-    prompt: "what is the capital of the moon?",
+    prompt: `read test.md and find out if it contains my name and what it's value is and my current working directory is ${
+      import.meta.dirname
+    }`,
     options: {
       ...optionsWithCleanEnv,
       model,
@@ -16,12 +18,15 @@ async function basicGenerate() {
   });
 
   for await (const message of resultIterator) {
+    console.log(JSON.stringify(message, null, 2));
+    console.log("\n---\n");
+
     // each message
     switch (message.type) {
       case "assistant":
         for (const content of message.message.content) {
           if (content.type === "text") {
-            console.log(content.text);
+            // console.log(content.text);
           }
         }
         break;
