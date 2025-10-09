@@ -2,13 +2,14 @@ import readline from "readline";
 import { optionsWithCleanEnv } from "./utils.js";
 import { query, Query } from "@anthropic-ai/claude-agent-sdk";
 import { AnthropicMessagesModelId } from "@langchain/anthropic";
+import { mcpServer } from "./tool_management/mcp_servers/index.js";
 
 let id: string | undefined;
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  prompt: "You: ",
+  prompt: "🙍‍♂️ You: ",
 });
 
 rl.prompt();
@@ -59,10 +60,20 @@ async function conversation(args: ConversationArgs) {
       ...optionsWithCleanEnv,
       resume: sessionId,
       model,
+      // mpcServers is a map of server names to server instances
+      mcpServers: {
+        ["weather_server"]: mcpServer,
+      },
+      // following naming pattern: mcp__{server_name}__{tool_name}
+      // server_name is the one in the above mcpServers map (not the one in the createSdkMcpServer)
+      // disallowedTools: ["mcp__weather_server__get_season"],
     },
   });
 
   for await (const message of iterator) {
+    console.log(JSON.stringify(message, null, 2));
+    console.log("\n---\n");
+
     switch (message.type) {
       case "system":
         if (message.subtype === "init") {
@@ -75,7 +86,7 @@ async function conversation(args: ConversationArgs) {
       case "assistant":
         for (const content of message.message.content) {
           if (content.type === "text") {
-            console.log(content.text);
+            console.log("🤖 Agent: " + content.text);
           }
         }
         break;
