@@ -23,6 +23,7 @@
     "ajv": "^8.17.1",
     "deepagents": "^0.0.2",
     "langchain": "^0.3.35",
+    "openai": "^6.3.0",
     "tiktoken": "^1.0.22",
     "zod": "^3"
   },
