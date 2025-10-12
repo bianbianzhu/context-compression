@@ -12,26 +12,26 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.1.10",
-    "@google/genai": "^1.22.0",
+    "@anthropic-ai/claude-agent-sdk": "^0.1.14",
+    "@google/genai": "^1.24.0",
     "@langchain/anthropic": "^0.3.30",
     "@langchain/community": "^0.3.57",
     "@langchain/core": "^0.3.78",
     "@langchain/google-genai": "^0.2.18",
     "@langchain/langgraph": "^0.4.9",
-    "@langchain/openai": "^0.6.14",
+    "@langchain/openai": "^0.6.15",
     "ajv": "^8.17.1",
     "deepagents": "^0.0.2",
     "langchain": "^0.3.35",
     "openai": "^6.3.0",
     "tiktoken": "^1.0.22",
-    "zod": "^3"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.10",
-    "@types/node": "^24.5.2",
-    "dotenv": "^17.2.2",
-    "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
+    "@types/node": "^24.7.2",
+    "dotenv": "^17.2.3",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   }
 }
