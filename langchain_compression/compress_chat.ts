@@ -92,6 +92,15 @@ export async function compressChat(
   const messagesToCompress = curatedMessages.slice(0, splitPoint);
   const messagesToKeep = curatedMessages.slice(splitPoint);
 
+  if (messagesToCompress.length === 0) {
+    return {
+      originalTokenCount,
+      afterCompressionTokenCount: originalTokenCount,
+      compressionStatus: "NOOP",
+      updatedMessages: messages,
+    };
+  }
+
   const compressPromptMessages: BaseMessage[] = [
     new SystemMessage(getCompressionPrompt()),
     ...messagesToCompress,
@@ -136,7 +145,7 @@ export async function compressChat(
 }
 
 // ================================
-// 这个getNumTokens方法有问题，不能用
+// langchain的这个getNumTokens方法有问题，不能用
 // 源代码中，如果参数不是string，那么直接返回0
 // 也没有帮我们清理langchain message内部带有的多余信息
 // console.log(
