@@ -55,6 +55,8 @@ const finishReason = result.response_metadata.finish_reason;
 const stopReason = result.response_metadata.stop_reason;
 
 const invalidFinishReason = result.response_metadata.finishReason;
+
+console.log(finishReason, stopReason, invalidFinishReason);
 // openai - response_metadata.finish_reason === "tool_calls"
 // anthropic - response_metadata.stop_reason === "tool_use"
 // google-genai - response_metadata.finishReason === "STOP" (didn't show tool call info)
