@@ -122,6 +122,14 @@ export class BaseClient {
     const historyToCompress = curatedHistory.slice(0, splitPoint);
     const historyToKeep = curatedHistory.slice(splitPoint);
 
+    if (historyToCompress.length === 0) {
+      return {
+        originalTokenCount,
+        newTokenCount: originalTokenCount,
+        compressionStatus: CompressionStatus.NOOP,
+      };
+    }
+
     const ai = new GoogleGenAI({
       apiKey: process.env.GOOGLE_API_KEY,
     });
@@ -235,7 +243,7 @@ function tokenLimitTest(model: string): number {
     case "gemini-2.5-flash":
     case "gemini-2.5-flash-lite":
     case "gemini-2.0-flash":
-      return 512;
+      return 256;
     case "gemini-2.0-flash-preview-image-generation":
       return 128;
     default:
